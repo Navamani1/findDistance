@@ -1,12 +1,6 @@
-# IDE #
-.idea/
-*.swp
 *.iml
-npm-debug.log
-C:\Project\public\findDistance\findDistance\.idea
-
-bin
+*.class
+*.jar
 target
-.project
-.settings
-.classpath
+.idea
+*.log
