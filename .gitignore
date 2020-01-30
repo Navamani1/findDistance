@@ -3,6 +3,7 @@
 *.swp
 *.iml
 npm-debug.log
+C:\Project\public\findDistance\findDistance\.idea
 
 bin
 target
