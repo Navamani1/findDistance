@@ -1,0 +1,28 @@
+<databaseChangeLog logicalFilePath="db.changelog-1.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="Create table postcode UK" author="Navamani" failOnError="true">
+        <createSequence catalogName="postCode" cycle="true" incrementBy="1" sequenceName="UK_POST_CODES_SEQ" startValue="1"/>
+
+        <createTable catalogName="postCode" tableName="UK_POST_CODES">
+            <column name="ID" type="NUMBER(19)" defaultValueSequenceNext="UK_POST_CODES_SEQ">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="POSTCODE" type="VARCHAR2(8)"><constraints nullable="false"/></column>
+            <column name="LATITUDE" type="VARCHAR2(255)"/>
+            <column name="LONGITUDE" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="populate postcode" author="Navamani" failOnError="true">
+        <loadData catalogName="postCode" file="ukpostcodes.csv" tableName="UK_POST_CODES">
+        <!--<loadData catalogName="postCode" file="ukpostcodes1.csv" tableName="UK_POST_CODES">-->  <!-- for quicker Test with 20,000 records -->
+            <column name="ID" header="id"/>
+            <column name="POSTCODE" header="postcode"/>
+            <column name="LATITUDE" header="latitude"/>
+            <column name="LONGITUDE" header="longitude"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

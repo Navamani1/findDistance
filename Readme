@@ -1,0 +1,95 @@
+I have created 'Application' springBoot class to run the application
+When run Spring boot application, tables will be created and data(1758226) records will be added into UK_POST_CODES table
+
+Retrieve All Post code details
+------------------------------
+This API will bring all the postal code details from the database.
+Since we have more data it is difficult to test because tool can't load that many records
+HTTP Method: Get
+
+http://localhost:8090/uk/postcodes
+[
+    {
+        "id": 1,
+        "postCode": "YO18RU",
+        "latitude": 53.9589747704882,
+        "longitude": -1.08079989936032
+    },
+    ...
+]
+
+Retrieve Post code details
+--------------------------
+We can retrieve post code by two different ways.
+1) By PostCode (YO18RU)
+2) By Id (1..)
+I used path variable to read the input from API.
+HTTP Method: Get
+
+http://localhost:8090/uk/postcode/20000 (or) http://localhost:8090/uk/postcode/YO18RU
+{
+    "id": 20000,
+    "postCode": "YO18RU",
+    "latitude": 53.9589747704882,
+    "longitude": -1.08079989936032
+}
+
+
+Update Post code details
+--------------------------
+We can update post code details like latitude, longitude.
+HTTP Method: Post
+
+http://localhost:8090/uk/postcode
+{
+    "id": 20000,
+    "postCode": "YO18RU",
+    "latitude": 53.9589747704882,
+    "longitude": -1.08079989936032
+}
+
+Delete Post code details
+--------------------------
+We can delete post code by two different ways.
+1) By PostCode (YO18RU)
+2) By Id (1..)
+I have used request param to read the input from API.
+HTTP Method: Delete
+
+http://localhost:8090/uk/postcode?id=1 (or) http://localhost:8090/uk/postcode?postcode=YO18RU
+
+
+Calculate distance between two Post codes
+-----------------------------------------
+We can find distance between postcodes
+HTTP Method: Get
+
+http://localhost:8090/uk/findDistance?origin=AB101XG&destination=YO18RU
+{
+    "originPostCode": "AB101XG",
+    "originLatitude": 57.14416516,
+    "originLongitude": -2.114847768,
+    "destinationPostCode": "YO18RU",
+    "destinationLatitude": 53.9589747704882,
+    "destinationLongitude": -1.08079989936032,
+    "distance": 360.0882058734432,
+    "unit": "KM"
+}
+
+
+
+Database:
+----------
+
+I hae used H2 in memory database for easy test and configuring this exercise.
+This can be accessed by the below url in browser after server start up.
+
+http://localhost:8090/h2-console/login.do
+userName: sa
+Password: sa
+
+
+Start up takes little longer time to load all the data. For test we can use ukpostcodes1.csv file which has only 20000 data. Which helps to
+run and test faster.
+This can be enabled in "db.changelog-1.xml" line number: 20
+

@@ -1,0 +1,11 @@
+# IDE #
+.idea/
+*.swp
+*.iml
+npm-debug.log
+
+bin
+target
+.project
+.settings
+.classpath
